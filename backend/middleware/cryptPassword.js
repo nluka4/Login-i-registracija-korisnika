@@ -4,7 +4,9 @@ async function cryptPassword(req, res, next) {
   const { _password } = req.body;
 
   const hash = await bcrypt.hash(_password, 10);
-  console.log(hash);
+
+  req.body._password = hash;
+
   next();
 }
 
