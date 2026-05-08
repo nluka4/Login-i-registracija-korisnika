@@ -1,0 +1,49 @@
+{
+  "users": [
+    {
+      "_id": 1,
+      "_username": "marko97",
+      "_fullName": "Marko Petrović",
+      "_email": "marko.petrovic@example.com",
+      "_password": "Marko123!",
+      "_bio": "Student računarstva koji voli web development i baze podataka.",
+      "_profileImage": "https://example.com/images/marko.jpg"
+    },
+    {
+      "_id": 2,
+      "_username": "ana_dev",
+      "_fullName": "Ana Jovanović",
+      "_email": "ana.jovanovic@example.com",
+      "_password": "Ana123!",
+      "_bio": "Frontend developer u učenju. Voli React, dizajn i kafu.",
+      "_profileImage": "https://example.com/images/ana.jpg"
+    },
+    {
+      "_id": 3,
+      "_username": "nikola88",
+      "_fullName": "Nikola Ilić",
+      "_email": "nikola.ilic@example.com",
+      "_password": "Nikola123!",
+      "_bio": "Backend entuzijasta. Najviše radi sa Node.js, Express-om i MySQL bazama.",
+      "_profileImage": "https://example.com/images/nikola.jpg"
+    },
+    {
+      "_id": 4,
+      "_username": "jovana_code",
+      "_fullName": "Jovana Milenković",
+      "_email": "jovana.milenkovic@example.com",
+      "_password": "Jovana123!",
+      "_bio": "Voli programiranje, UI/UX i rad na timskim projektima.",
+      "_profileImage": "https://example.com/images/jovana.jpg"
+    },
+    {
+      "_id": 5,
+      "_username": "luka_admin",
+      "_fullName": "Luka Stojanović",
+      "_email": "luka.stojanovic@example.com",
+      "_password": "Luka123!",
+      "_bio": "Administrator sistema i tester aplikacije.",
+      "_profileImage": "https://example.com/images/luka.jpg"
+    }
+  ]
+}

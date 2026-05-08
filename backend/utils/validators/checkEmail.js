@@ -42,6 +42,14 @@ function checkEmail(emailVal) {
 
   const [localPart, domainPart] = emailVal.split("@");
 
+  if (
+    !/^[A-Za-z0-9._%+-]+$/.test(localPart) ||
+    !/^[A-Za-z0-9._%+-]+$/.test(domainPart)
+  ) {
+    checkEmailObj.message = "Email ne sme sadrzati specijalne karaktere!";
+    checkEmailObj.valid = false;
+    return checkEmailObj;
+  }
   if (localPart === "") {
     checkEmailObj.message = "Email mora imati deo pre (@)!";
     checkEmailObj.valid = false;
@@ -86,7 +94,7 @@ function checkEmail(emailVal) {
   const lastDomainPart = domainParts[domainParts.length - 1];
 
   if (lastDomainPart.length < 2) {
-    ("Zavrsni domen mora imati bar 2 karaktera!");
+    ("Poslednji domen mora imati barem 2 karaktera!");
     checkEmailObj.valid = false;
     return checkEmailObj;
   }

@@ -1,6 +1,8 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const cors = require("cors");
+require("dotenv").config();
+
 const app = express();
 
 app.use(express.json());
@@ -18,5 +20,5 @@ const authRoute = require("./routes/authRoute");
 
 app.use("/api/auth", authRoute);
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log("Slusa na portu " + PORT));
