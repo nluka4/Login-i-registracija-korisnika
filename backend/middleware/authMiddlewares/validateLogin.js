@@ -1,4 +1,5 @@
-const checkEmail = require("../utils/validators/checkEmail");
+const checkEmail = require("../../utils/validators/checkEmail");
+const checkPassword = require("../../utils/validators/checkPassword");
 
 function validateLogin(req, res, next) {
   const { _email, _password } = req.body;
@@ -10,7 +11,12 @@ function validateLogin(req, res, next) {
   const notifyIfEmailIsValid = checkEmail(_email);
   if (!notifyIfEmailIsValid.valid) {
     res.status(404).send(notifyIfEmailIsValid.message);
+    return;
+  }
 
+  const notifyIfPasswordIsValid = checkPassword(_password);
+  if (!notifyIfEmailIsValid) {
+    res.status(404).send(notifyIfPasswordIsValid.message);
     return;
   }
 
