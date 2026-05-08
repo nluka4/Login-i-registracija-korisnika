@@ -35,7 +35,7 @@ const upload = multer({
   storage: storage,
 
   limits: {
-    fileSize: 1000000,
+    fileSize: 5000000,
   },
 
   fileFilter: function (req, file, cb) {
@@ -44,6 +44,7 @@ const upload = multer({
 }).single("_profileImage");
 
 function uploadMiddleware(req, res, next) {
+  console.log(req.body);
   upload(req, res, function (err) {
     if (err) {
       return res.status(400).json({

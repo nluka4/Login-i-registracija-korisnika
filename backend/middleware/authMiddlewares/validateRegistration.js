@@ -1,25 +1,34 @@
 const checkEmail = require("../../utils/validators/checkEmail");
 const checkPassword = require("../../utils/validators/checkPassword");
-const users = require("../../model/users.json");
+const usersObj = require("../../model/users.json");
 function validateRegistration(req, res, next) {
   const { _username, _fullName, _email, _password, _bio, _profileImage } =
     req.body;
+  let { users } = usersObj;
   let user = null;
+  //   let tmp = {
+  //     username: _username,
+  //     fullname: _fullName,
+  //     email: _email,
+  //     _password: _password,
+  //     bio: _bio,
+  //     img: _profileImage,
+  //   };
 
-  if (
-    !_username ||
-    !_fullName ||
-    !_email ||
-    !_password ||
-    !_bio ||
-    !_profileImage
-  ) {
-    res.status(404).send("Nepotpun request");
+  //   console.log("===========================");
+  //   console.log(tmp);
+
+  if (!_username || !_fullName || !_email || !_password || !_bio) {
+    return res.status(404).send("Nepotpun request");
+  }
+
+  if (!req.file) {
+    return res.status(404).send("Nepotpun request");
   }
 
   // Check if username is correct
-  let usernameTrimmed = _username.trim();
-
+  let usernameTrimmed = _username.trim() || 0;
+  console.log(usernameTrimmed);
   let usernameLength = usernameTrimmed.length;
 
   if (
@@ -46,16 +55,16 @@ function validateRegistration(req, res, next) {
       .status(404)
       .json({ message: "username ne moze sadrzati specijalne karaktere" });
   }
-
   user = users.find((el) => el._username === usernameTrimmed);
 
   if (user) {
-    return res.status(404).json({ message: "usernam je vec u upotrebi" });
+    return res.status(404).json({ message: "username je vec u upotrebi" });
   }
 
   //check full name
-  const { firstName, lastName } = _fullName.split(" ");
-
+  const [firstName, lastName] = _fullName.split(" ");
+  console.log("Ime: " + firstName);
+  console.log("prezime: " + lastName);
   if (!firstName || !lastName) {
     return res.status(404).json({ message: "Unesi ime i prezime" });
   }
@@ -66,7 +75,7 @@ function validateRegistration(req, res, next) {
       .json({ message: "Ime mora sadrzati barem 2 karaktera" });
   }
 
-  if (firstName.length < 30) {
+  if (firstName.length > 30) {
     return res
       .status(404)
       .json({ message: "Ime ne moze sadrzati vise od 30 karaktera" });
@@ -78,7 +87,7 @@ function validateRegistration(req, res, next) {
       .json({ message: "Prezime mora sadrzati barem 2 karaktera" });
   }
 
-  if (lastName.length < 30) {
+  if (lastName.length > 30) {
     return res
       .status(404)
       .json({ message: "Prezime ne moze sadrzati vise od 30 karaktera" });
@@ -101,7 +110,7 @@ function validateRegistration(req, res, next) {
 
   //check bio
 
-  let bioTrimmed = _bio.trim();
+  let bioTrimmed = _bio.trim() || 0;
   let bioLength = bioTrimmed.length;
 
   if (bioLength > 300) {
@@ -125,6 +134,8 @@ function validateRegistration(req, res, next) {
     res.status(404).send(notifyIfPasswordIsValid.message);
     return;
   }
+
+  console.log("Prosao sve");
 
   next();
 }
