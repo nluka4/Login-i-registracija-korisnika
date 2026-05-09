@@ -1,0 +1,68 @@
+{
+  "users": [
+    {
+      "_id": 1,
+      "_username": "marko97",
+      "_fullName": "Marko Petrović",
+      "_email": "marko.petrovic@example.com",
+      "_password": "Marko123!",
+      "_bio": "Student računarstva koji voli web development i baze podataka.",
+      "_profileImage": "https://example.com/images/marko.jpg",
+      "_createdAt": "2026-05-09 18:00:00",
+      "_updatedAt": "2026-05-09 18:00:00"
+    },
+    {
+      "_id": 2,
+      "_username": "ana_dev",
+      "_fullName": "Ana Jovanović",
+      "_email": "ana.jovanovic@example.com",
+      "_password": "Ana123!",
+      "_bio": "Frontend developer u učenju. Voli React, dizajn i kafu.",
+      "_profileImage": "https://example.com/images/ana.jpg",
+      "_createdAt": "2026-05-09 18:05:00",
+      "_updatedAt": "2026-05-09 18:05:00"
+    },
+    {
+      "_id": 3,
+      "_username": "nikola01",
+      "_fullName": "Nikola Ilić",
+      "_email": "nikola.ilic@example.com",
+      "_password": "Nikola123!",
+      "_bio": "Backend entuzijasta koji vežba Node.js, Express i MySQL.",
+      "_profileImage": "https://example.com/images/nikola.jpg",
+      "_createdAt": "2026-05-09 18:10:00",
+      "_updatedAt": "2026-05-09 18:10:00"
+    },
+    {
+      "_id": 4,
+      "_username": "milica_ui",
+      "_fullName": "Milica Stanković",
+      "_email": "milica.stankovic@example.com",
+      "_password": "Milica123!",
+      "_bio": "Bavi se UI/UX dizajnom i voli da pravi moderne web aplikacije.",
+      "_profileImage": "https://example.com/images/milica.jpg",
+      "_createdAt": "2026-05-09 18:15:00",
+      "_updatedAt": "2026-05-09 18:15:00"
+    },
+    {
+      "_id": 5,
+      "_username": "luka_code",
+      "_fullName": "Luka Nikolić",
+      "_email": "luka.nikolic@example.com",
+      "_password": "Luka123!",
+      "_bio": "Uči full-stack development i trenutno radi sa Express backendom.",
+      "_profileImage": "https://example.com/images/luka.jpg",
+      "_createdAt": "2026-05-09 18:20:00",
+      "_updatedAt": "2026-05-09 18:20:00"
+    },
+    {
+      "_id": 923,
+      "_username": "madjar2",
+      "_fullName": "mare madjar",
+      "_email": "madjarovic@example.com",
+      "_password": "$2b$10$RK.Ge2sZaPcjtf/Gyiblpe/drAf.ynJ0/MaMQxc6aU8m5akqMVUUW",
+      "_bio": "Ja sam madjar",
+      "_profileImage": "_profileImage-1778347541645.jpg"
+    }
+  ]
+}

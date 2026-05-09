@@ -1,0 +1,110 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Login/Register API",
+    "version": "1.0.0",
+    "description": "Swagger dokumentacija za auth API"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "Login i registracija korisnika"
+    }
+  ],
+  "paths": {
+    "/api/auth/register": {
+      "post": {
+        "summary": "Registracija",
+        "description": "Ruta za registraciju novog korisnika.",
+        "tags": ["Auth"],
+        "responses": {
+          "201": {
+            "description": "Korisnik je uspešno registrovan."
+          },
+          "400": {
+            "description": "Neispravan zahtev."
+          },
+          "500": {
+            "description": "Serverska greška."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "_email": {
+                    "type": "string",
+                    "example": "test@example.com"
+                  },
+                  "_password": {
+                    "type": "string",
+                    "example": "Test123!"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "summary": "Login",
+        "description": "Ruta za prijavu postojećeg korisnika.",
+        "tags": ["Auth"],
+        "responses": {
+          "200": {
+            "description": "Korisnik je uspešno ulogovan."
+          },
+          "401": {
+            "description": "Pogrešan email ili password."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "_username": {
+                    "type": "string",
+                    "example": "mare"
+                  },
+                  "_fullName": {
+                    "type": "string",
+                    "example": "Mare Markovic"
+                  },
+                  "_email": {
+                    "type": "string",
+                    "example": "test@example.com"
+                  },
+                  "_password": {
+                    "type": "string",
+                    "example": "Test123!"
+                  },
+                  "_bio": {
+                    "type": "string",
+                    "example": "Lorem ipsum..."
+                  },
+                  "_profileImage": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

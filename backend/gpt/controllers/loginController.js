@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const fs = require("fs/promises");
 const jwt = require("jsonwebtoken");
 const path = require("path");
+const swaggerUI = require("swagger-ui-express");
 
 async function loginController(req, res) {
   try {
