@@ -44,7 +44,6 @@ const upload = multer({
 }).single("_profileImage");
 
 function uploadMiddleware(req, res, next) {
-  console.log(req.body);
   upload(req, res, function (err) {
     if (err) {
       return res.status(400).json({
@@ -58,6 +57,7 @@ function uploadMiddleware(req, res, next) {
       });
     }
 
+    req.body._profileImage = req.file.filename;
     next();
   });
 }

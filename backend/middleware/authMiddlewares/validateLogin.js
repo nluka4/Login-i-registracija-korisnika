@@ -8,7 +8,7 @@ function validateLogin(req, res, next) {
     res.status(404).send("Nepotpun request");
   }
 
-  const notifyIfEmailIsValid = checkEmail(_email);
+  const notifyIfEmailIsValid = checkEmail(_email, req.originalUrl);
   if (!notifyIfEmailIsValid.valid) {
     res.status(404).send(notifyIfEmailIsValid.message);
     return;

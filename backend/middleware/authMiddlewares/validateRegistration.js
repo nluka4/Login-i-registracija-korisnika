@@ -1,22 +1,21 @@
 const checkEmail = require("../../utils/validators/checkEmail");
 const checkPassword = require("../../utils/validators/checkPassword");
 const usersObj = require("../../model/users.json");
-function validateRegistration(req, res, next) {
-  const { _username, _fullName, _email, _password, _bio, _profileImage } =
-    req.body;
-  let { users } = usersObj;
-  let user = null;
-  //   let tmp = {
-  //     username: _username,
-  //     fullname: _fullName,
-  //     email: _email,
-  //     _password: _password,
-  //     bio: _bio,
-  //     img: _profileImage,
-  //   };
 
-  //   console.log("===========================");
-  //   console.log(tmp);
+function validateRegistration(req, res, next) {
+  let { users } = usersObj;
+  const { _id, _username, _fullName, _email, _password, _bio, _profileImage } =
+    req.body;
+  let user = null;
+  let tmp = {
+    id: _id,
+    username: _username,
+    fullname: _fullName,
+    email: _email,
+    password: _password,
+    bio: _bio,
+    img: _profileImage,
+  };
 
   if (!_username || !_fullName || !_email || !_password || !_bio) {
     return res.status(404).send("Nepotpun request");
@@ -28,7 +27,6 @@ function validateRegistration(req, res, next) {
 
   // Check if username is correct
   let usernameTrimmed = _username.trim() || 0;
-  console.log(usernameTrimmed);
   let usernameLength = usernameTrimmed.length;
 
   if (
@@ -63,8 +61,6 @@ function validateRegistration(req, res, next) {
 
   //check full name
   const [firstName, lastName] = _fullName.split(" ");
-  console.log("Ime: " + firstName);
-  console.log("prezime: " + lastName);
   if (!firstName || !lastName) {
     return res.status(404).json({ message: "Unesi ime i prezime" });
   }
@@ -122,7 +118,7 @@ function validateRegistration(req, res, next) {
   //check image
 
   //check email
-  const notifyIfEmailIsValid = checkEmail(_email);
+  const notifyIfEmailIsValid = checkEmail(_email, req.originalUrl);
   if (!notifyIfEmailIsValid.valid) {
     res.status(404).send(notifyIfEmailIsValid.message);
     return;
@@ -134,8 +130,6 @@ function validateRegistration(req, res, next) {
     res.status(404).send(notifyIfPasswordIsValid.message);
     return;
   }
-
-  console.log("Prosao sve");
 
   next();
 }

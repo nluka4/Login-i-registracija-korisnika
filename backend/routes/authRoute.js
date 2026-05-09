@@ -10,12 +10,6 @@ const validateRegistration = require("../middleware/authMiddlewares/validateRegi
 const registerController = require("../controllers/registerController");
 const router = express.Router();
 
-console.log("uploadMiddleware:", typeof uploadMiddleware);
-console.log("validateRegistration:", typeof validateRegistration);
-console.log("cryptPassword:", typeof cryptPassword);
-console.log("validateLogin:", typeof validateLogin);
-console.log("loginController:", typeof loginController);
-
 router.post(
   "/register",
   uploadMiddleware,

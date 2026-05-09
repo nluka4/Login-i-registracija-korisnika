@@ -44,6 +44,60 @@
       "_password": "Luka123!",
       "_bio": "Administrator sistema i tester aplikacije.",
       "_profileImage": "https://example.com/images/luka.jpg"
+    },
+    {
+      "_id": 473,
+      "_username": "ma",
+      "_fullName": "mare madjar",
+      "_email": "markoperovic@example.com",
+      "_password": "$2b$10$dUndfXWgfeX/NaPs9Y/YQ.QxgIh.WdAJnW5CZ1sn/NET4rgpgEe/6",
+      "_bio": "Ja sam madjar",
+      "_profileImage": "_profileImage-1778340616837.jpg"
+    },
+    {
+      "_id": 467,
+      "_username": "mad",
+      "_fullName": "mare madjar",
+      "_email": "madkoperovic@example.com",
+      "_password": "$2b$10$VEdRSr2rsLT4pZmdoeeKh.gYwpqe2Yc0YlbZhv8yX9wdyuagVWMjq",
+      "_bio": "Ja sam madjar",
+      "_profileImage": "_profileImage-1778341135096.jpg"
+    },
+    {
+      "_id": 406,
+      "_username": "madj",
+      "_fullName": "mare madjar",
+      "_email": "madjoperovic@example.com",
+      "_password": "$2b$10$r6TlImIo3NFLb1h07YmOcu11s.J3CVSbaUi.nHpj16VMX6gZkyzA2",
+      "_bio": "Ja sam madjar",
+      "_profileImage": "_profileImage-1778341468754.jpg"
+    },
+    {
+      "_id": 752,
+      "_username": "madjar",
+      "_fullName": "mare madjar",
+      "_email": "madjarerovic@example.com",
+      "_password": "$2b$10$t4w1BS8wIruLZYJOqXJ.ZOGLSYRwdx0AD9BOz5I.cgLcdG33IIR92",
+      "_bio": "Ja sam madjar",
+      "_profileImage": "_profileImage-1778344172637.jpg"
+    },
+    {
+      "_id": 601,
+      "_username": "madjar1",
+      "_fullName": "mare madjar",
+      "_email": "madjarrovic@example.com",
+      "_password": "$2b$10$oCrMVGs8GhFJdjuMA6e1IOAdPQddLixH9AEYIOtYRxyt.71mIk/ze",
+      "_bio": "Ja sam madjar",
+      "_profileImage": "_profileImage-1778344331669.jpg"
+    },
+    {
+      "_id": 546,
+      "_username": "madjar2",
+      "_fullName": "mare madjar",
+      "_email": "madjarovic@example.com",
+      "_password": "$2b$10$9iieQ1nTwUV9zikRuIMoNedgWTZ8lzglQ8pAlgVQzDDjc.lKqjgfW",
+      "_bio": "Ja sam madjar",
+      "_profileImage": "_profileImage-1778344549412.jpg"
     }
   ]
 }

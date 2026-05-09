@@ -1,4 +1,6 @@
-function checkEmail(emailVal) {
+const { users } = require("../../model/users.json");
+
+function checkEmail(emailVal, url) {
   const checkEmailObj = {
     message: "Ispravan mail",
     valid: true,
@@ -94,9 +96,18 @@ function checkEmail(emailVal) {
   const lastDomainPart = domainParts[domainParts.length - 1];
 
   if (lastDomainPart.length < 2) {
-    ("Poslednji domen mora imati barem 2 karaktera!");
+    checkEmailObj.message = "Poslednji domen mora imati barem 2 karaktera!";
     checkEmailObj.valid = false;
     return checkEmailObj;
+  }
+
+  if (url.includes("register")) {
+    let user = users.find((el) => el._email === emailVal);
+    if (user) {
+      checkEmailObj.message = "Nalog sa ovim mejlom vec postoji";
+      checkEmailObj.valid = false;
+      return checkEmailObj;
+    }
   }
   return checkEmailObj;
 }
