@@ -3,7 +3,12 @@ import InputFullName from "./registerAndLoginComponents/InputFullName";
 import InputEmail from "./registerAndLoginComponents/InputEmail";
 import InputPassword from "./registerAndLoginComponents/InputPassword";
 import InputBio from "./registerAndLoginComponents/InputBio";
-export default function LoginForm() {
+import { useState } from "react";
+export default function RegisterForm() {
+  const [validation, setValidation] = useState({
+    password: false,
+    email: false,
+  });
   // function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
   //   e.preventDefault();
   //   try {
@@ -50,8 +55,8 @@ export default function LoginForm() {
       <form>
         <InputUsername />
         <InputFullName />
-        <InputEmail />
-        <InputPassword />
+        <InputEmail setValidation={setValidation} />
+        <InputPassword setValidation={setValidation} />
         <InputBio />
         <div>
           <input
@@ -61,11 +66,11 @@ export default function LoginForm() {
             accept="jpeg, jpg, png, gif"
           />
         </div>
-        {/* {validation.email === true && validation.password === true ? (
+        {validation.email === true && validation.password === true ? (
           <button>Prijavi se</button>
         ) : (
           <></>
-        )} */}
+        )}
       </form>
     </>
   );

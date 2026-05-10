@@ -1,27 +1,17 @@
-// type ValidationState = {
-//   email: boolean;
-//   password: boolean;
-// };
-
 import { useState } from "react";
 
-// type InputEmailProps = {
-//   email: string;
-//   setEmail: React.Dispatch<React.SetStateAction<string>>;
+type ValidationState = {
+  email: boolean;
+  password: boolean;
+};
 
-//   errorEmail: string;
-//   setErrorEmail: React.Dispatch<React.SetStateAction<string>>;
+type InputEmailProps = {
+  setValidation: React.Dispatch<React.SetStateAction<ValidationState>>;
+};
 
-//   setValidation: React.Dispatch<React.SetStateAction<ValidationState>>;
-// };
-
-export default function InputEmail() {
+export default function InputEmail({ setValidation }: InputEmailProps) {
   const [email, setEmail] = useState("");
   const [errorEmail, setErrorEmail] = useState("");
-  const [validation, setValidation] = useState({
-    password: false,
-    email: false,
-  });
 
   function handleSetEmail(e: React.ChangeEvent<HTMLInputElement>): void {
     const emailVal: string = e.target.value.trim();

@@ -1,12 +1,18 @@
 import { useState } from "react";
 
-export default function InputPassword() {
+type ValidationState = {
+  email: boolean;
+  password: boolean;
+};
+
+type InputEmailProps = {
+  setValidation: React.Dispatch<React.SetStateAction<ValidationState>>;
+};
+
+export default function InputPassword({ setValidation }: InputEmailProps) {
   const [password, setPassword] = useState("");
   const [errorPassword, setErrorPassword] = useState("");
-  const [validation, setValidation] = useState({
-    password: false,
-    email: false,
-  });
+
   function handleSetPassword(e: React.ChangeEvent<HTMLInputElement>): void {
     const passValue = e.target.value;
 
