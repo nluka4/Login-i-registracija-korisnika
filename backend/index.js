@@ -2,7 +2,7 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const cors = require("cors");
 const swaggerui = require("swagger-ui-express");
-const swaggerDocument = require("./docs/swagger.json");
+const swaggerDocument = require("./docs/auth.json");
 
 require("dotenv").config();
 
@@ -15,6 +15,11 @@ app.use(
     origin: "http://localhost:5173",
   }),
 );
+
+app.use((req, res, next) => {
+  req.body = req.body || {};
+  next();
+});
 
 app.get("/", (req, res) => {
   res.status(200).send("Pozz");

@@ -8,7 +8,7 @@ function getRandomId(min, max, usersJSON) {
     const minCeiled = Math.ceil(min);
     const maxFloored = Math.floor(max);
     id = Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled); // The maximum is inclusive and the minimum is inclusive
-  } while (users.find((el) => el._id == id));
+  } while (users?.find((el) => el._id == id));
 
   return id;
 }
@@ -32,10 +32,26 @@ async function registerController(req, res) {
       "utf8",
     );
 
+    let usersUpdated;
     const dataJSON = JSON.parse(dataVar);
 
+    //dodeljivanje id-ja i role-a
     user._id = getRandomId(0, 1000, dataJSON);
-    let usersUpdated = [...dataJSON.users, user];
+
+    user._role = {
+      viewer: true,
+      admin: false,
+      groupOwner: {},
+      goupAdmin: {},
+    };
+
+    if (Object.entries(dataJSON).length === 0) {
+      usersUpdated = [user];
+      await fs.writeFile(fileName, JSON.stringify({ users: usersUpdated }));
+      return res.status(201).json(user);
+    }
+
+    usersUpdated = [...dataJSON.users, user];
 
     await fs.writeFile(fileName, JSON.stringify({ users: usersUpdated }));
     return res.status(201).json(user);

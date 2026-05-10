@@ -5,7 +5,7 @@ function validateLogin(req, res, next) {
   const { _email, _password } = req.body;
 
   if (!_email || !_password) {
-    res.status(404).send("Nepotpun request");
+    return res.status(404).send("Nepotpun request");
   }
 
   const notifyIfEmailIsValid = checkEmail(_email, req.originalUrl);
@@ -15,7 +15,7 @@ function validateLogin(req, res, next) {
   }
 
   const notifyIfPasswordIsValid = checkPassword(_password);
-  if (!notifyIfEmailIsValid) {
+  if (!notifyIfEmailIsValid.valid) {
     res.status(404).send(notifyIfPasswordIsValid.message);
     return;
   }

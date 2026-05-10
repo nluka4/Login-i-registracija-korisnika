@@ -102,7 +102,7 @@ function checkEmail(emailVal, url) {
   }
 
   if (url.includes("register")) {
-    let user = users.find((el) => el._email === emailVal);
+    let user = users?.find((el) => el._email === emailVal);
     if (user) {
       checkEmailObj.message = "Nalog sa ovim mejlom vec postoji";
       checkEmailObj.valid = false;

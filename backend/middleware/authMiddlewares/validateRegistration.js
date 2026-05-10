@@ -4,17 +4,15 @@ const usersObj = require("../../model/users.json");
 
 function validateRegistration(req, res, next) {
   let { users } = usersObj;
-  const { _id, _username, _fullName, _email, _password, _bio, _profileImage } =
-    req.body;
+  console.log("ALOOOOOOOOOOOOOO");
+  const { _username, _fullName, _email, _password, _bio } = req.body;
   let user = null;
   let tmp = {
-    id: _id,
     username: _username,
     fullname: _fullName,
     email: _email,
     password: _password,
     bio: _bio,
-    img: _profileImage,
   };
 
   if (!_username || !_fullName || !_email || !_password || !_bio) {
@@ -53,7 +51,8 @@ function validateRegistration(req, res, next) {
       .status(404)
       .json({ message: "username ne moze sadrzati specijalne karaktere" });
   }
-  user = users.find((el) => el._username === usernameTrimmed);
+
+  user = users?.find((el) => el._username === usernameTrimmed);
 
   if (user) {
     return res.status(404).json({ message: "username je vec u upotrebi" });
@@ -126,7 +125,7 @@ function validateRegistration(req, res, next) {
 
   //check password
   const notifyIfPasswordIsValid = checkPassword(_password);
-  if (!notifyIfEmailIsValid) {
+  if (!notifyIfEmailIsValid.valid) {
     res.status(404).send(notifyIfPasswordIsValid.message);
     return;
   }

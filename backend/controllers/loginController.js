@@ -27,12 +27,15 @@ async function loginController(req, res) {
       });
     }
 
-    const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN);
+    const payload = {
+      id: user._id,
+      username: user._username,
+      roles: user._role,
+    };
+    const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN);
 
     res.status(200).json({
       message: "Uspesno si se prijavio",
-      email: req.body._email,
-      password: req.body._password,
       jwt: accessToken,
     });
   } catch (err) {
