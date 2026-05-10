@@ -47,7 +47,7 @@ async function registerController(req, res) {
     return res.status(201).json(user);
   } catch (error) {
     console.log(error);
-    return res.status(500).send("Internal server error");
+    return res.status(500).json({ message: "Internal server error" });
   }
 }
 

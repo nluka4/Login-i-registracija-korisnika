@@ -1,25 +1,17 @@
 const checkEmail = require("../../utils/validators/checkEmail");
 const checkPassword = require("../../utils/validators/checkPassword");
 const usersObj = require("../../model/users.json");
-
 function validateRegistration(req, res, next) {
   let { users } = usersObj;
   const { _username, _fullName, _email, _password, _bio } = req.body;
   let user = null;
-  let tmp = {
-    username: _username,
-    fullname: _fullName,
-    email: _email,
-    password: _password,
-    bio: _bio,
-  };
 
   if (!_username || !_fullName || !_email || !_password || !_bio) {
-    return res.status(404).send("Nepotpun request");
+    return res.status(400).json({ message: "Incomplete request." });
   }
 
   if (!req.file) {
-    return res.status(404).send("Nepotpun request");
+    return res.status(400).json({ message: "Profile image is required." });
   }
 
   // Check if username is correct
@@ -30,101 +22,108 @@ function validateRegistration(req, res, next) {
     usernameTrimmed[0] === "." ||
     usernameTrimmed[usernameTrimmed.length - 1] === "."
   ) {
-    return res.status(404).json({
-      message: "kosrisnicko ime ne sme pocinjati ili se zavrsavati sa tackom",
+    return res.status(400).json({
+      message: "Username cannot start or end with a dot.",
     });
   }
 
   if (usernameTrimmed.includes(" ")) {
-    return res.status(404).json({ message: "username ne sme sadrzati space" });
+    return res.status(400).json({
+      message: "Username must not contain spaces.",
+    });
   }
 
   if (usernameLength > 20) {
-    return res
-      .status(404)
-      .json({ message: "username ne moze imati vise od 20 karaktea" });
+    return res.status(400).json({
+      message: "Username cannot contain more than 20 characters.",
+    });
   }
 
   if (!/^[A-Za-z0-9._%+-]+$/.test(usernameTrimmed)) {
-    return res
-      .status(404)
-      .json({ message: "username ne moze sadrzati specijalne karaktere" });
+    return res.status(400).json({
+      message:
+        "Username can contain only letters, numbers, dots, underscores, percent signs, plus signs and hyphens.",
+    });
   }
 
   user = users?.find((el) => el._username === usernameTrimmed);
 
   if (user) {
-    return res.status(404).json({ message: "username je vec u upotrebi" });
+    return res.status(400).json({
+      message: "Username is already in use.",
+    });
   }
 
-  //check full name
+  // Check full name
   const [firstName, lastName] = _fullName.split(" ");
+
   if (!firstName || !lastName) {
-    return res.status(404).json({ message: "Unesi ime i prezime" });
+    return res.status(400).json({
+      message: "Please enter both first name and last name.",
+    });
   }
 
   if (firstName.length < 2) {
-    return res
-      .status(404)
-      .json({ message: "Ime mora sadrzati barem 2 karaktera" });
+    return res.status(400).json({
+      message: "First name must contain at least 2 characters.",
+    });
   }
 
   if (firstName.length > 30) {
-    return res
-      .status(404)
-      .json({ message: "Ime ne moze sadrzati vise od 30 karaktera" });
+    return res.status(400).json({
+      message: "First name cannot contain more than 30 characters.",
+    });
   }
 
   if (lastName.length < 2) {
-    return res
-      .status(404)
-      .json({ message: "Prezime mora sadrzati barem 2 karaktera" });
+    return res.status(400).json({
+      message: "Last name must contain at least 2 characters.",
+    });
   }
 
   if (lastName.length > 30) {
-    return res
-      .status(404)
-      .json({ message: "Prezime ne moze sadrzati vise od 30 karaktera" });
+    return res.status(400).json({
+      message: "Last name cannot contain more than 30 characters.",
+    });
   }
 
-  //dozvoljava slova,space,' i -
+  // Allows letters, spaces, apostrophes and hyphens
   const fullNameRegex = /^[\p{L} '-]+$/u;
 
   if (!fullNameRegex.test(firstName)) {
-    return res
-      .status(404)
-      .json({ message: "Ime ne moze sadrzati specijalne karaktere" });
+    return res.status(400).json({
+      message: "First name must not contain special characters.",
+    });
   }
 
   if (!fullNameRegex.test(lastName)) {
-    return res
-      .status(404)
-      .json({ message: "Prezime ne moze sadrzati specijalne karaktere" });
+    return res.status(400).json({
+      message: "Last name must not contain special characters.",
+    });
   }
 
-  //check bio
-
+  // Check bio
   let bioTrimmed = _bio.trim() || 0;
   let bioLength = bioTrimmed.length;
 
   if (bioLength > 300) {
-    return res
-      .status(404)
-      .json({ message: "Biografija ne sme sadrzati vise od 300 karaktera" });
+    return res.status(400).json({
+      message: "Biography cannot contain more than 300 characters.",
+    });
   }
 
-  //check email
+  // Check email
   const notifyIfEmailIsValid = checkEmail(_email, req.originalUrl);
+
   if (!notifyIfEmailIsValid.valid) {
-    res.status(404).send(notifyIfEmailIsValid.message);
-    return;
+    return res.status(400).json({ message: notifyIfEmailIsValid.message });
   }
 
-  //check password
+  // Check password
   const notifyIfPasswordIsValid = checkPassword(_password);
-  if (!notifyIfEmailIsValid.valid) {
-    res.status(404).send(notifyIfPasswordIsValid.message);
-    return;
+
+  if (!notifyIfPasswordIsValid.valid) {
+    return res.status(400).json({ message: notifyIfPasswordIsValid.message });
   }
 
   next();

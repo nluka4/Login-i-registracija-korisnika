@@ -16,14 +16,16 @@ async function loginController(req, res) {
 
     const user = users.find((el) => el._email === req.body._email);
 
+    // 404 didn't find the user
     if (!user) {
       return res.status(404).json({
-        message: "Cannot find user, try again.",
+        message: "User not found.",
       });
     }
+    //401 correct email, incorrect password, unauthorized access
     if (!(await bcrypt.compare(req.body._password, user._password))) {
-      return res.status(404).json({
-        message: "Not allowed.",
+      return res.status(401).json({
+        message: "Incorrect password.",
       });
     }
 
@@ -35,7 +37,7 @@ async function loginController(req, res) {
     const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN);
 
     res.status(200).json({
-      message: "Uspesno si se prijavio",
+      message: "Successful",
       jwt: accessToken,
     });
   } catch (err) {

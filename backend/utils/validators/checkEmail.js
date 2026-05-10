@@ -2,29 +2,29 @@ const { users } = require("../../model/users.json");
 
 function checkEmail(emailVal, url) {
   const checkEmailObj = {
-    message: "Ispravan mail",
+    message: "Valid email",
     valid: true,
   };
   if (emailVal === "") {
-    checkEmailObj.message = "Moras popuniti email polje!";
+    checkEmailObj.message = "You must fill in the email field!";
     checkEmailObj.valid = false;
     return checkEmailObj;
   }
 
   if (emailVal.includes(" ")) {
-    checkEmailObj.message = "Email ne sme sadrzati razmake!";
+    checkEmailObj.message = "Email must not contain spaces!";
     checkEmailObj.valid = false;
     return checkEmailObj;
   }
 
   if (/[A-Z]/.test(emailVal)) {
-    checkEmailObj.message = "Email ne moze sadrzati veliko slovo !";
+    checkEmailObj.message = "Email must not contain uppercase letters!";
     checkEmailObj.valid = false;
     return checkEmailObj;
   }
 
   if (!emailVal.includes("@")) {
-    checkEmailObj.message = "Email mora posedovati (@)";
+    checkEmailObj.message = "Email must contain (@)!";
     checkEmailObj.valid = false;
     return checkEmailObj;
   }
@@ -35,7 +35,7 @@ function checkEmail(emailVal, url) {
     }
     for (let j = i + 1; j < emailVal.length; j++) {
       if (emailVal[i] == emailVal[j]) {
-        checkEmailObj.message = "Email moze imati samo jedan (@)!";
+        checkEmailObj.message = "Email can contain only one (@)!";
         checkEmailObj.valid = false;
         return checkEmailObj;
       }
@@ -48,37 +48,36 @@ function checkEmail(emailVal, url) {
     !/^[A-Za-z0-9._%+-]+$/.test(localPart) ||
     !/^[A-Za-z0-9._%+-]+$/.test(domainPart)
   ) {
-    checkEmailObj.message = "Email ne sme sadrzati specijalne karaktere!";
+    checkEmailObj.message = "Email must not contain special characters!";
     checkEmailObj.valid = false;
     return checkEmailObj;
   }
   if (localPart === "") {
-    checkEmailObj.message = "Email mora imati deo pre (@)!";
+    checkEmailObj.message = "Email must have a part before (@)!";
     checkEmailObj.valid = false;
     return checkEmailObj;
   }
 
   if (domainPart === "") {
-    checkEmailObj.message = "Navedi domen!";
+    checkEmailObj.message = "Please provide a domain!";
     checkEmailObj.valid = false;
     return checkEmailObj;
   }
 
   if (!domainPart.includes(".")) {
-    checkEmailObj.message = "Email mora posedovati (.) !";
+    checkEmailObj.message = "Email must contain a dot (.)!";
     checkEmailObj.valid = false;
     return checkEmailObj;
   }
 
   if (emailVal.startsWith(".") || emailVal.endsWith(".")) {
-    checkEmailObj.message =
-      "Email ne moze pocinjati ili se zavrsavati sa (.) !";
+    checkEmailObj.message = "Email cannot start or end with a dot (.)!";
     checkEmailObj.valid = false;
     return checkEmailObj;
   }
 
   if (emailVal.includes("..")) {
-    checkEmailObj.message = "Ne smes imati sekvencu tacaka (...) !";
+    checkEmailObj.message = "Email must not contain consecutive dots!";
     checkEmailObj.valid = false;
     return checkEmailObj;
   }
@@ -87,7 +86,7 @@ function checkEmail(emailVal, url) {
 
   for (let i = 0; i < domainParts.length; i++) {
     if (domainParts[i] === "") {
-      checkEmailObj.message = "Domen nije ispravan!";
+      checkEmailObj.message = "Domain is not valid!";
       checkEmailObj.valid = false;
       return checkEmailObj;
     }
@@ -96,7 +95,8 @@ function checkEmail(emailVal, url) {
   const lastDomainPart = domainParts[domainParts.length - 1];
 
   if (lastDomainPart.length < 2) {
-    checkEmailObj.message = "Poslednji domen mora imati barem 2 karaktera!";
+    checkEmailObj.message =
+      "The last domain part must contain at least 2 characters!";
     checkEmailObj.valid = false;
     return checkEmailObj;
   }
@@ -104,7 +104,7 @@ function checkEmail(emailVal, url) {
   if (url.includes("register")) {
     let user = users?.find((el) => el._email === emailVal);
     if (user) {
-      checkEmailObj.message = "Nalog sa ovim mejlom vec postoji";
+      checkEmailObj.message = "An account with this email already exists!";
       checkEmailObj.valid = false;
       return checkEmailObj;
     }
