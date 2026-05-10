@@ -1,17 +1,7 @@
 const fs = require("fs/promises");
 const fileName = "./model/users.json";
 const path = require("path");
-function getRandomId(min, max, usersJSON) {
-  let { users } = usersJSON;
-  let id;
-  do {
-    const minCeiled = Math.ceil(min);
-    const maxFloored = Math.floor(max);
-    id = Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled); // The maximum is inclusive and the minimum is inclusive
-  } while (users?.find((el) => el._id == id));
-
-  return id;
-}
+const { v4: uuidv4 } = require("uuid");
 
 async function registerController(req, res) {
   /*
@@ -36,13 +26,13 @@ async function registerController(req, res) {
     const dataJSON = JSON.parse(dataVar);
 
     //dodeljivanje id-ja i role-a
-    user._id = getRandomId(0, 1000, dataJSON);
+    user._id = uuidv4();
 
     user._role = {
       viewer: true,
       admin: false,
       groupOwner: {},
-      goupAdmin: {},
+      groupAdmin: {},
     };
 
     if (Object.entries(dataJSON).length === 0) {

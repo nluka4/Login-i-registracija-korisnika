@@ -15,7 +15,7 @@ function validateLogin(req, res, next) {
   }
 
   const notifyIfPasswordIsValid = checkPassword(_password);
-  if (!notifyIfEmailIsValid.valid) {
+  if (!notifyIfPasswordIsValid.valid) {
     res.status(404).send(notifyIfPasswordIsValid.message);
     return;
   }

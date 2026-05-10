@@ -4,7 +4,6 @@ const usersObj = require("../../model/users.json");
 
 function validateRegistration(req, res, next) {
   let { users } = usersObj;
-  console.log("ALOOOOOOOOOOOOOO");
   const { _username, _fullName, _email, _password, _bio } = req.body;
   let user = null;
   let tmp = {
@@ -113,8 +112,6 @@ function validateRegistration(req, res, next) {
       .status(404)
       .json({ message: "Biografija ne sme sadrzati vise od 300 karaktera" });
   }
-
-  //check image
 
   //check email
   const notifyIfEmailIsValid = checkEmail(_email, req.originalUrl);
